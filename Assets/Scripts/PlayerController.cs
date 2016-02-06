@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour {
 
 	private Rigidbody rb;
 	private int count;
+	public GameObject player;
+	public GameObject[] pickuparr;
+
 
 	void Start ()
 	{
@@ -17,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 		count = 0;
 		SetCountText ();
 		winText.text = "";
+		pickuparr = GameObject.FindGameObjectsWithTag ("Pick Up");
 	}
 
 	void FixedUpdate ()
@@ -45,6 +49,26 @@ public class PlayerController : MonoBehaviour {
 		if (count >= 12)
 		{
 			winText.text = "You Win!";
+
+			Reset ();
+
 		}
 	}
+
+	void Reset () 
+	{
+		count = 0;
+
+
+
+		Vector3 origin = new Vector3 (0, 0, 0);
+		player.transform.position = origin;
+
+		for (int i = 0; i < 12; i++) 
+		{
+			pickuparr [i].SetActive (true);
+		}
+
+	}	
+		
 }
